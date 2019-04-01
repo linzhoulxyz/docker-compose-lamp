@@ -1,5 +1,9 @@
 FROM php:7.3.3-apache
 
+# Replace update source
+RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
+ADD sources.list /etc/apt/
+
 RUN apt-get -y update --fix-missing
 RUN apt-get upgrade -y
 
