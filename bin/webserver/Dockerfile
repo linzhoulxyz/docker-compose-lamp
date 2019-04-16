@@ -38,5 +38,10 @@ RUN docker-php-ext-install -j$(nproc) gd
 RUN docker-php-ext-install opcache \
     && rm -r /var/lib/apt/lists/*
 
+RUN apt-get update -yqq && \
+    apt-get install -y libldap2-dev && \
+    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+    docker-php-ext-install ldap    
+
 # Enable apache modules
 RUN a2enmod rewrite headers
